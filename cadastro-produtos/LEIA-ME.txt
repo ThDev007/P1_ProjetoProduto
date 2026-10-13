@@ -1,0 +1,38 @@
+CADASTRO DE PRODUTOS (JavaFX + Maven)
+
+REQUISITOS: JDK 17 ou superior e Maven.
+
+COMO EXECUTAR
+  Terminal na pasta do projeto:   mvn clean javafx:run
+  No IntelliJ: rode a classe br.com.produtos.Launcher (NAO rode a App direto)
+  ou use a aba Maven: Plugins > javafx > javafx:run
+
+SCENE BUILDER
+  Abra: src/main/resources/br/com/produtos/Main.fxml
+  Mantenha os fx:id e os onAction (#salvar, #novo, #excluir, #exportar,
+  #gerarRelatorio) iguais aos do ProdutoController.
+
+VALIDACOES (classe Validador)
+  - Codigo: exatamente 8 caracteres alfanumericos (e nao pode repetir)
+  - Nome: nao vazio, minimo de 3 caracteres
+  - Data de fabricacao: nao pode ser posterior a data atual
+  - Data de validade: nao pode ser anterior a data de fabricacao
+  - Precos: positivos; preco de venda MAIOR que o preco de compra
+  - Quantidade em estoque: nao negativa
+
+PERSISTENCIA (classe ProdutoRepository)
+  - CSV em dados/Produtos.csv, campos separados por ponto e virgula
+  - Carregado ao iniciar o programa
+  - Gravado de novo apos cada cadastro, edicao ou exclusao
+  - Se voce tem um Produtos.csv de uma versao anterior, APAGUE-O: o formato mudou
+
+RELATORIOS COM STREAM API (classe RelatorioService)
+  - Proximos ao vencimento (60 dias)       -> filter, sorted, map
+  - Estoque baixo (menos de 10 unidades)   -> filter, sorted, map
+  - Margem de lucro media por categoria    -> groupingBy, averagingDouble
+  - Produtos agrupados por categoria       -> groupingBy
+  - Resumo geral                           -> reduce, mapToInt, filter, count
+
+SALVAR EM ARQUIVO
+  Botao "Salvar em arquivo..." escolhe pasta e nome (.csv ou .txt) e
+  pergunta se quer abrir o arquivo.
